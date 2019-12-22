@@ -17,6 +17,9 @@
 		AB27D39423AFB75200EC4B11 /* SporcleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB27D39323AFB75200EC4B11 /* SporcleUITests.swift */; };
 		AB27D3A823AFBB1E00EC4B11 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB27D3A723AFBB1E00EC4B11 /* Game.swift */; };
 		AB27D3AC23AFBBD500EC4B11 /* GameDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB27D3AB23AFBBD500EC4B11 /* GameDelegate.swift */; };
+		AB4C5D0623B0240D005311A5 /* QuizService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4C5D0523B0240D005311A5 /* QuizService.swift */; };
+		AB4C5D0823B0242E005311A5 /* Quiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4C5D0723B0242E005311A5 /* Quiz.swift */; };
+		AB4C5D0A23B027A0005311A5 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4C5D0923B027A0005311A5 /* UIViewController+Alert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +56,9 @@
 		AB27D39523AFB75200EC4B11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB27D3A723AFBB1E00EC4B11 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		AB27D3AB23AFBBD500EC4B11 /* GameDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDelegate.swift; sourceTree = "<group>"; };
+		AB4C5D0523B0240D005311A5 /* QuizService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizService.swift; sourceTree = "<group>"; };
+		AB4C5D0723B0242E005311A5 /* Quiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz.swift; sourceTree = "<group>"; };
+		AB4C5D0923B027A0005311A5 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				AB27D37523AFB74F00EC4B11 /* GameViewController.swift */,
+				AB4C5D0923B027A0005311A5 /* UIViewController+Alert.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -170,6 +177,8 @@
 		AB27D3A623AFBA3400EC4B11 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				AB4C5D0723B0242E005311A5 /* Quiz.swift */,
+				AB4C5D0523B0240D005311A5 /* QuizService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -305,11 +314,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB4C5D0623B0240D005311A5 /* QuizService.swift in Sources */,
 				AB27D3AC23AFBBD500EC4B11 /* GameDelegate.swift in Sources */,
+				AB4C5D0823B0242E005311A5 /* Quiz.swift in Sources */,
 				AB27D37623AFB74F00EC4B11 /* GameViewController.swift in Sources */,
 				AB27D37223AFB74F00EC4B11 /* AppDelegate.swift in Sources */,
 				AB27D37423AFB74F00EC4B11 /* SceneDelegate.swift in Sources */,
 				AB27D3A823AFBB1E00EC4B11 /* Game.swift in Sources */,
+				AB4C5D0A23B027A0005311A5 /* UIViewController+Alert.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

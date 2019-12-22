@@ -6,7 +6,10 @@ protocol GameDelegate: class {
 			  didMatchWord word: String)
 
 	func game(_ game: Game,
-			  didUpdateTime: TimeInterval)
+			  didUpdateScore score: Int)
+
+	func game(_ game: Game,
+			  didUpdateTime timeInSeconds: TimeInterval)
 
 	func gameDidLose(_ game: Game)
 

@@ -13,7 +13,11 @@ class Game {
 
 	private var timer: Timer? = nil
 
-	private(set) var score: Int
+	private(set) var score: Int {
+		didSet {
+			delegate?.game(self, didUpdateScore: score)
+		}
+	}
 
 	private(set) var timeInSeconds: TimeInterval {
 		didSet {
@@ -21,7 +25,11 @@ class Game {
 		}
 	}
 
+	private(set) var isRunning = false
+
 	weak var delegate: GameDelegate?
+
+	var wordsCount: Int { words.count }
 
 	var matchedWordsCount: Int { matchedWords.count }
 
@@ -39,6 +47,7 @@ class Game {
 	func start() {
 		reset()
 		startTimer()
+		isRunning = true
 	}
 
 	func reset() {
@@ -46,6 +55,7 @@ class Game {
 		matchedWords = []
 		score = 0
 		timeInSeconds = Constants.GAME_START_TIME
+		isRunning = false
 	}
 
 	func matchedWord(at indexPath: IndexPath) -> String? {
@@ -63,6 +73,8 @@ class Game {
 			delegate?.game(self, didMatchWord: word)
 
 			if score == words.count {
+				isRunning = false
+				stopTimer()
 				delegate?.gameDidWin(self)
 			}
 		}
@@ -79,13 +91,15 @@ class Game {
 
 	private func startTimer() {
 		stopTimer()
-		timer = Timer(timeInterval: Constants.ONE_SECOND, repeats: false) { [weak self] _ in
+		timer = Timer.scheduledTimer(withTimeInterval: Constants.ONE_SECOND, repeats: true) { [weak self] _ in
 			guard let self = self else { return }
 
 			self.timeInSeconds -= Constants.ONE_SECOND
 
-			if self.timeInSeconds == 0 {
+			if self.timeInSeconds <= 0 {
+				self.isRunning = false
 				self.delegate?.gameDidLose(self)
+				self.stopTimer()
 			}
 		}
 	}

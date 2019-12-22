@@ -31,8 +31,11 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                        <connections>
+                                            <action selector="keywordTextFieldDidChange:" destination="BYZ-38-t0r" eventType="editingChanged" id="S6N-e1-Eao"/>
+                                        </connections>
                                     </textField>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GW7-h3-Aha">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GW7-h3-Aha">
                                         <rect key="frame" x="0.0" y="110.5" width="382" height="707.5"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <prototypes>
@@ -90,6 +93,9 @@
                                                 <state key="normal" title="Start">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="startResetButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kP6-0U-1aG"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -102,22 +108,46 @@
                                     <constraint firstItem="Xpb-hE-iNv" firstAttribute="top" secondItem="cRs-vt-zTt" secondAttribute="top" constant="16" id="oPt-B5-6Cl"/>
                                 </constraints>
                             </view>
+                            <view hidden="YES" opaque="NO" alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UGt-Qr-aye" userLabel="Loading View">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="zuL-YU-e0c">
+                                        <rect key="frame" x="188.5" y="390.5" width="37" height="37"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="zuL-YU-e0c" firstAttribute="centerY" secondItem="UGt-Qr-aye" secondAttribute="centerY" id="HBK-1S-5Sl"/>
+                                    <constraint firstItem="zuL-YU-e0c" firstAttribute="centerX" secondItem="UGt-Qr-aye" secondAttribute="centerX" id="bXV-LD-k7t"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="lF0-fd-JY0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="0gf-8X-8jY"/>
                             <constraint firstItem="lF0-fd-JY0" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="31x-wv-t3a"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="UGt-Qr-aye" secondAttribute="bottom" id="KGf-zt-15a"/>
+                            <constraint firstItem="UGt-Qr-aye" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="LIZ-fi-5kw"/>
                             <constraint firstItem="cRs-vt-zTt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="O5g-Vw-xhM"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="lF0-fd-JY0" secondAttribute="bottom" id="OAM-cy-mmR"/>
+                            <constraint firstItem="UGt-Qr-aye" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="SR3-Bd-UIh"/>
                             <constraint firstAttribute="bottomMargin" secondItem="cRs-vt-zTt" secondAttribute="bottom" id="SxU-wa-XDb"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="cRs-vt-zTt" secondAttribute="trailing" id="UBl-Yy-Yoj"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lF0-fd-JY0" secondAttribute="trailing" constant="16" id="quz-6Y-gYa"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="UGt-Qr-aye" secondAttribute="trailing" id="tVM-cB-tv7"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicatorView" destination="zuL-YU-e0c" id="jzk-y0-dsV"/>
                         <outlet property="controlsViewBottomConstraint" destination="m0O-Hv-YaP" id="4Iz-53-Dnx"/>
+                        <outlet property="keywordTextField" destination="1Gu-hC-g33" id="s64-I8-EyT"/>
+                        <outlet property="loadingView" destination="UGt-Qr-aye" id="fAL-ql-gGb"/>
+                        <outlet property="scoreLabel" destination="Pfu-Om-SL4" id="jBz-AA-9yy"/>
+                        <outlet property="startResetButton" destination="24d-1e-L7p" id="s5L-oJ-5ok"/>
                         <outlet property="tableView" destination="GW7-h3-Aha" id="QcQ-YM-1bS"/>
+                        <outlet property="timeLabel" destination="dxY-1o-0cM" id="7VC-7g-1ug"/>
+                        <outlet property="titleLabel" destination="Nwl-Fz-ruD" id="woI-aq-ToR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
