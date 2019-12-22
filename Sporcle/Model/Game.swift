@@ -23,6 +23,8 @@ class Game {
 
 	weak var delegate: GameDelegate?
 
+	var matchedWordsCount: Int { matchedWords.count }
+
 	init(words: [String]) {
 		self.words = words
 		matchedWords = []
@@ -44,6 +46,10 @@ class Game {
 		matchedWords = []
 		score = 0
 		timeInSeconds = Constants.GAME_START_TIME
+	}
+
+	func matchedWord(at indexPath: IndexPath) -> String? {
+		matchedWords[indexPath.row]
 	}
 
 	func match(word: String) {
