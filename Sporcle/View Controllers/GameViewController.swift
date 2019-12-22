@@ -1,10 +1,11 @@
 import UIKit
 
-fileprivate enum Constants {
+private enum Constants {
 	static let CELL_IDENTIFIER = "WordCell"
+	static let DEFAULT_KEYBOARD_ANIMATION_DURATION: NSNumber = 0.3
 }
 
-class GameViewController: UIViewController {
+final class GameViewController: UIViewController {
 
 	@IBOutlet private weak var tableView: UITableView! {
 		didSet {
@@ -13,10 +14,26 @@ class GameViewController: UIViewController {
 		}
 	}
 
-	fileprivate var game: Game? {
+	@IBOutlet private weak var controlsViewBottomConstraint: NSLayoutConstraint!
+
+	private var game: Game? {
 		didSet {
 			game?.delegate = self
 		}
+	}
+
+	// MARK: Life cycle
+
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+
+		setupKeyboardNotifications()
+	}
+
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+
+		cleanUpKeyboardNotifications()
 	}
 
 }
@@ -57,5 +74,56 @@ extension GameViewController: GameDelegate {
 	func gameDidLose(_ game: Game) { }
 
 	func gameDidWin(_ game: Game) { }
+
+}
+
+// MARK: Keyboard
+
+private extension GameViewController {
+
+	func setupKeyboardNotifications() {
+		NotificationCenter.default.addObserver(self,
+											   selector: #selector(keyboardWillShow),
+											   name: UIResponder.keyboardWillShowNotification,
+											   object: nil)
+
+		NotificationCenter.default.addObserver(self,
+											   selector: #selector(keyboardWillHide),
+											   name: UIResponder.keyboardWillHideNotification,
+											   object: nil)
+	}
+
+	func cleanUpKeyboardNotifications() {
+		NotificationCenter.default.removeObserver(self,
+												  name: UIResponder.keyboardWillShowNotification,
+												  object: nil)
+
+		NotificationCenter.default.removeObserver(self,
+												  name: UIResponder.keyboardWillHideNotification,
+												  object: nil)
+	}
+
+	@objc func keyboardWillShow(_ notification: Notification) {
+		guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+
+		moveControlsView(constant: keyboardFrame.cgRectValue.height,
+						 notification: notification)
+	}
+
+	@objc func keyboardWillHide(_ notification: Notification) {
+		moveControlsView(constant: 0,
+						 notification: notification)
+	}
+
+	func moveControlsView(constant: CGFloat,
+						  notification: Notification) {
+		let animationDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber ?? Constants.DEFAULT_KEYBOARD_ANIMATION_DURATION
+
+		controlsViewBottomConstraint.constant = constant
+
+		UIView.animate(withDuration: animationDuration.doubleValue) {
+			self.view.layoutIfNeeded()
+		}
+	}
 
 }

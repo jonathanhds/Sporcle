@@ -116,6 +116,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="controlsViewBottomConstraint" destination="m0O-Hv-YaP" id="4Iz-53-Dnx"/>
                         <outlet property="tableView" destination="GW7-h3-Aha" id="QcQ-YM-1bS"/>
                     </connections>
                 </viewController>
