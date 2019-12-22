@@ -1,6 +1,6 @@
 import UIKit
 
-fileprivate struct Constants {
+fileprivate enum Constants {
 	static let CELL_IDENTIFIER = "WordCell"
 }
 
@@ -9,6 +9,7 @@ class GameViewController: UIViewController {
 	@IBOutlet private weak var tableView: UITableView! {
 		didSet {
 			tableView.dataSource = self
+			tableView.tableFooterView = UITableViewHeaderFooterView()
 		}
 	}
 
