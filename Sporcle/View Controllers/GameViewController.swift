@@ -36,7 +36,7 @@ final class GameViewController: UIViewController {
 		}
 	}
 
-	// MARK: Life cycle
+	// MARK: - Life cycle
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -57,7 +57,7 @@ final class GameViewController: UIViewController {
 		cleanUpKeyboardNotifications()
 	}
 
-	// MARK: Loading
+	// MARK: - Loading
 
 	private func showLoadingView() {
 		activityIndicatorView.startAnimating()
@@ -69,7 +69,7 @@ final class GameViewController: UIViewController {
 		loadingView.isHidden = true
 	}
 
-	// MARK: Quiz logic
+	// MARK: - Quiz logic
 
 	private func loadQuiz() {
 		showLoadingView()
@@ -125,7 +125,7 @@ final class GameViewController: UIViewController {
 		timeLabel.alpha = alpha
 	}
 
-	// MARK: User actions
+	// MARK: - User actions
 
 	@IBAction private func startResetButtonClicked(_ sender: UIButton) {
 		if game?.isRunning == true {
@@ -140,7 +140,7 @@ final class GameViewController: UIViewController {
 		game?.match(word: text)
 	}
 
-	// MARK: Error handling
+	// MARK: - Error handling
 
 	private func showMessage(forError error: Error,
 							 completion: @escaping () -> Void) {
@@ -152,7 +152,7 @@ final class GameViewController: UIViewController {
 
 }
 
-// MARK: UITableViewDataSource
+// MARK: - UITableViewDataSource
 
 extension GameViewController: UITableViewDataSource {
 
@@ -173,7 +173,7 @@ extension GameViewController: UITableViewDataSource {
 
 }
 
-// MARK: GameDelegate
+// MARK: - GameDelegate
 
 extension GameViewController: GameDelegate {
 
@@ -224,7 +224,7 @@ extension GameViewController: GameDelegate {
 
 }
 
-// MARK: Keyboard
+// MARK: - Keyboard
 
 private extension GameViewController {
 
