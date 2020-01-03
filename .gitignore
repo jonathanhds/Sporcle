@@ -94,3 +94,5 @@ iOSInjectionProject/
 ### Xcode Patch ###
 **/xcshareddata/WorkspaceSettings.xcsettings
 
+BuildTools/.build
+BuildTools/.swiftpm

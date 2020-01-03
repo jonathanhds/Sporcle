@@ -1,7 +1,5 @@
 struct Quiz {
+    let title: String
 
-	let title: String
-
-	let words: [String]
-
+    let words: [String]
 }

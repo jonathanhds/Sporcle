@@ -1,8 +1,7 @@
-import Foundation
 import Combine
+import Foundation
 
 class GameViewModel {
-
     @Published private(set) var title: String = ""
 
     @Published private(set) var score: String = ""
@@ -33,7 +32,7 @@ class GameViewModel {
     func loadQuiz() {
         isLoading = true
 
-        QuizService().loadQuiz() { (quiz, error) in
+        QuizService().loadQuiz { quiz, error in
             DispatchQueue.main.async { [weak self] in
                 self?.isLoading = false
 
@@ -70,14 +69,12 @@ class GameViewModel {
     func matchedWord(at indexPath: IndexPath) -> String? {
         game?.matchedWord(at: indexPath)
     }
-
 }
 
 // MARK: - GameDelegate
 
 extension GameViewModel: GameDelegate {
-
-    func game(_ game: Game, didMatchWord word: String) {
+    func game(_: Game, didMatchWord word: String) {
         matchedWord.send(word)
     }
 
@@ -85,19 +82,18 @@ extension GameViewModel: GameDelegate {
         self.score = "\(score)/\(game.wordsCount)"
     }
 
-    func game(_ game: Game, didUpdateTime timeInSeconds: TimeInterval) {
+    func game(_: Game, didUpdateTime timeInSeconds: TimeInterval) {
         let minutes = Int(timeInSeconds) / 60
         let seconds = Int(timeInSeconds) % 60
 
         time = String(format: "%02i:%02i", minutes, seconds)
     }
 
-    func gameDidLose(_ game: Game) {
+    func gameDidLose(_: Game) {
         gameResult.send(false)
     }
 
-    func gameDidWin(_ game: Game) {
+    func gameDidWin(_: Game) {
         gameResult.send(true)
     }
-
 }
