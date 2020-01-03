@@ -1,4 +1,5 @@
 import UIKit
+import Combine
 
 private enum Constants {
 	static let CELL_IDENTIFIER = "WordCell"
@@ -30,19 +31,18 @@ final class GameViewController: UIViewController {
 
 	@IBOutlet private weak var activityIndicatorView: UIActivityIndicatorView!
 
-	private var game: Game? {
-		didSet {
-			game?.delegate = self
-		}
-	}
+	private let viewModel: GameViewModel = GameViewModel()
 
-	// MARK: - Life cycle
+	private var disposables = Set<AnyCancellable>()
+
+	// MARK: Life cycle
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
+		bind(to: viewModel)
+
 		changeLabelsDisplay(isHidden: true)
-		loadQuiz()
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -51,13 +51,100 @@ final class GameViewController: UIViewController {
 		setupKeyboardNotifications()
 	}
 
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+
+		viewModel.loadQuiz()
+	}
+
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
 
 		cleanUpKeyboardNotifications()
 	}
 
-	// MARK: - Loading
+	// MARK: Binding
+
+	private func bind(to viewModel: GameViewModel) {
+		viewModel.$title
+			.receive(on: DispatchQueue.main)
+			.sink { [weak self] title in
+				self?.titleLabel.text = title
+		}
+		.store(in: &disposables)
+
+		viewModel.$score
+			.receive(on: DispatchQueue.main)
+			.sink { [weak self] title in
+				self?.scoreLabel.text = title
+		}
+		.store(in: &disposables)
+
+		viewModel.$time
+			.receive(on: DispatchQueue.main)
+			.sink { [weak self] title in
+				self?.timeLabel.text = title
+		}
+		.store(in: &disposables)
+
+		viewModel.$isLoading
+			.receive(on: DispatchQueue.main)
+			.sink { [weak self] isLoading in
+				if isLoading {
+					self?.showLoadingView()
+				} else {
+					self?.hideLoadingView()
+				}
+		}.store(in: &disposables)
+
+		viewModel.$game
+			.receive(on: DispatchQueue.main)
+			.sink { [weak self] _ in
+				self?.prepareGame()
+		}.store(in: &disposables)
+
+		viewModel.gameStarted
+			.receive(on: DispatchQueue.main)
+			.sink { [weak self] title in
+				self?.startGame()
+		}
+		.store(in: &disposables)
+
+		viewModel.gameReseted
+			.receive(on: DispatchQueue.main)
+			.sink { [weak self] title in
+				self?.resetGame()
+		}
+		.store(in: &disposables)
+
+		viewModel.matchedWord
+			.receive(on: DispatchQueue.main)
+			.sink { [weak self] _ in
+				self?.keywordTextField.text = ""
+				self?.tableView.reloadData()
+		}.store(in: &disposables)
+
+		viewModel.gameResult
+			.receive(on: DispatchQueue.main)
+			.sink { [weak self] isWin in
+				if isWin {
+					self?.playerDidWin()
+				} else {
+					self?.playerDidLose()
+				}
+		}
+		.store(in: &disposables)
+
+		viewModel.loadingError
+			.receive(on: DispatchQueue.main)
+			.sink { [weak self] error in
+				self?.showMessage(forError: error) {
+					self?.viewModel.loadQuiz()
+				}
+		}.store(in: &disposables)
+	}
+
+	// MARK: Loading
 
 	private func showLoadingView() {
 		activityIndicatorView.startAnimating()
@@ -69,32 +156,9 @@ final class GameViewController: UIViewController {
 		loadingView.isHidden = true
 	}
 
-	// MARK: - Quiz logic
+	// MARK: Quiz logic
 
-	private func loadQuiz() {
-		showLoadingView()
-
-		QuizService().loadQuiz() { (quiz, error) in
-			DispatchQueue.main.async { [weak self] in
-				self?.hideLoadingView()
-
-				if let quiz = quiz {
-					self?.prepareGame(with: quiz)
-				} else if let error = error {
-					self?.showMessage(forError: error) {
-						self?.loadQuiz()
-					}
-				}
-			}
-		}
-	}
-
-	private func prepareGame(with quiz: Quiz) {
-		titleLabel.text = quiz.title
-
-		game = Game(words: quiz.words)
-		game?.reset()
-
+	private func prepareGame() {
 		changeLabelsDisplay(isHidden: false)
 	}
 
@@ -102,7 +166,7 @@ final class GameViewController: UIViewController {
 		keywordTextField.isEnabled = false
 		startResetButton.setTitle("Start", for: .normal)
 
-		game?.reset()
+		viewModel.reset()
 
 		tableView.reloadData()
 		keywordTextField.resignFirstResponder()
@@ -112,7 +176,7 @@ final class GameViewController: UIViewController {
 		keywordTextField.isEnabled = true
 		startResetButton.setTitle("Stop", for: .normal)
 
-		game?.start()
+		viewModel.start()
 
 		keywordTextField.becomeFirstResponder()
 	}
@@ -125,22 +189,36 @@ final class GameViewController: UIViewController {
 		timeLabel.alpha = alpha
 	}
 
-	// MARK: - User actions
+	// MARK: User actions
+
+	private func playerDidLose() {
+		keywordTextField.resignFirstResponder()
+
+		showAlert(title: "Too bad!", message: "Oh no, It's game over! Tap OK to restart the game.") { [weak self] in
+			self?.resetGame()
+		}
+	}
+
+	private func playerDidWin() {
+		keywordTextField.resignFirstResponder()
+
+		showAlert(title: "Congrats!", message: "Yay, you won! Tap OK to restart the game.") { [weak self] in
+			self?.resetGame()
+		}
+	}
+
+	// MARK: User actions
 
 	@IBAction private func startResetButtonClicked(_ sender: UIButton) {
-		if game?.isRunning == true {
-			resetGame()
-		} else {
-			startGame()
-		}
+		viewModel.startOrResetGame()
 	}
 
 	@IBAction private func keywordTextFieldDidChange(_ sender: UITextField) {
 		guard let text = sender.text else { return }
-		game?.match(word: text)
+		viewModel.match(word: text)
 	}
 
-	// MARK: - Error handling
+	// MARK: Error handling
 
 	private func showMessage(forError error: Error,
 							 completion: @escaping () -> Void) {
@@ -158,68 +236,17 @@ extension GameViewController: UITableViewDataSource {
 
 	func tableView(_ tableView: UITableView,
 				   numberOfRowsInSection section: Int) -> Int {
-		game?.matchedWordsCount ?? 0
+		viewModel.matchedWordsCount ?? 0
 	}
 
 	func tableView(_ tableView: UITableView,
 				   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		guard let matchedWord = game?.matchedWord(at: indexPath) else { fatalError("Could not find matched word for IndexPath: \(indexPath)") }
+		guard let matchedWord = viewModel.matchedWord(at: indexPath) else { fatalError("Could not find matched word for IndexPath: \(indexPath)") }
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CELL_IDENTIFIER) else { fatalError("Could not dequeue cell for identifier: \(Constants.CELL_IDENTIFIER)") }
 
 		cell.textLabel?.text = matchedWord
 
 		return cell
-	}
-
-}
-
-// MARK: - GameDelegate
-
-extension GameViewController: GameDelegate {
-
-	func game(_ game: Game,
-			  didMatchWord word: String) {
-		DispatchQueue.main.async { [weak self] in
-			self?.keywordTextField.text = ""
-			self?.tableView.reloadData()
-		}
-	}
-
-	func game(_ game: Game,
-			  didUpdateScore score: Int) {
-		DispatchQueue.main.async { [weak self] in
-			self?.scoreLabel.text = "\(score)/\(game.wordsCount)"
-		}
-	}
-
-	func game(_ game: Game,
-			  didUpdateTime timeInSeconds: TimeInterval) {
-		let minutes = Int(timeInSeconds) / 60
-        let seconds = Int(timeInSeconds) % 60
-
-		DispatchQueue.main.async { [weak self] in
-			self?.timeLabel.text = String(format: "%02i:%02i", minutes, seconds)
-		}
-	}
-
-	func gameDidLose(_ game: Game) {
-		DispatchQueue.main.async { [weak self] in
-			self?.keywordTextField.resignFirstResponder()
-
-			self?.showAlert(title: "Too bad!", message: "Oh no, It's game over! Tap OK to restart the game.") {
-				self?.resetGame()
-			}
-		}
-	}
-
-	func gameDidWin(_ game: Game) {
-		DispatchQueue.main.async { [weak self] in
-			self?.keywordTextField.resignFirstResponder()
-
-			self?.showAlert(title: "Congrats!", message: "Yay, you won! Tap OK to restart the game.") {
-				self?.resetGame()
-			}
-		}
 	}
 
 }
