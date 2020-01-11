@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A4A8721A23C3DF4A00481367 /* GameTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A8721923C3DF4A00481367 /* GameTest.swift */; };
 		AB27D37223AFB74F00EC4B11 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB27D37123AFB74F00EC4B11 /* AppDelegate.swift */; };
 		AB27D37423AFB74F00EC4B11 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB27D37323AFB74F00EC4B11 /* SceneDelegate.swift */; };
 		AB27D37623AFB74F00EC4B11 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB27D37523AFB74F00EC4B11 /* GameViewController.swift */; };
 		AB27D37923AFB74F00EC4B11 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB27D37723AFB74F00EC4B11 /* Main.storyboard */; };
 		AB27D37B23AFB75100EC4B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB27D37A23AFB75100EC4B11 /* Assets.xcassets */; };
 		AB27D37E23AFB75100EC4B11 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB27D37C23AFB75100EC4B11 /* LaunchScreen.storyboard */; };
-		AB27D38923AFB75200EC4B11 /* SporcleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB27D38823AFB75200EC4B11 /* SporcleTests.swift */; };
 		AB27D39423AFB75200EC4B11 /* SporcleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB27D39323AFB75200EC4B11 /* SporcleUITests.swift */; };
 		AB27D3A823AFBB1E00EC4B11 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB27D3A723AFBB1E00EC4B11 /* Game.swift */; };
 		AB27D3AC23AFBBD500EC4B11 /* GameDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB27D3AB23AFBBD500EC4B11 /* GameDelegate.swift */; };
@@ -41,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A4A8721923C3DF4A00481367 /* GameTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTest.swift; sourceTree = "<group>"; };
 		AB27D36E23AFB74F00EC4B11 /* Sporcle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sporcle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB27D37123AFB74F00EC4B11 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB27D37323AFB74F00EC4B11 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -50,7 +51,6 @@
 		AB27D37D23AFB75100EC4B11 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AB27D37F23AFB75100EC4B11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB27D38423AFB75200EC4B11 /* SporcleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SporcleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		AB27D38823AFB75200EC4B11 /* SporcleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SporcleTests.swift; sourceTree = "<group>"; };
 		AB27D38A23AFB75200EC4B11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB27D38F23AFB75200EC4B11 /* SporcleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SporcleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB27D39323AFB75200EC4B11 /* SporcleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SporcleUITests.swift; sourceTree = "<group>"; };
@@ -88,7 +88,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A4CE82F323D0A30C000E96C8 /* Support files */ = {
+		A41466BF23C3ECCC00674677 /* Support files */ = {
 			isa = PBXGroup;
 			children = (
 				AB27D38A23AFB75200EC4B11 /* Info.plist */,
@@ -96,12 +96,12 @@
 			name = "Support files";
 			sourceTree = "<group>";
 		};
-		A4CE82F423D0A319000E96C8 /* Support files */ = {
+		A4A8721823C3DEB800481367 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				AB27D39523AFB75200EC4B11 /* Info.plist */,
+				A4A8721923C3DF4A00481367 /* GameTest.swift */,
 			);
-			name = "Support files";
+			path = Model;
 			sourceTree = "<group>";
 		};
 		AB27D36523AFB74F00EC4B11 = {
@@ -140,8 +140,8 @@
 		AB27D38723AFB75200EC4B11 /* SporcleTests */ = {
 			isa = PBXGroup;
 			children = (
-				AB27D38823AFB75200EC4B11 /* SporcleTests.swift */,
-				A4CE82F323D0A30C000E96C8 /* Support files */,
+				A4A8721823C3DEB800481367 /* Model */,
+				A41466BF23C3ECCC00674677 /* Support files */,
 			);
 			path = SporcleTests;
 			sourceTree = "<group>";
@@ -281,6 +281,7 @@
 					};
 					AB27D38323AFB75200EC4B11 = {
 						CreatedOnToolsVersion = 11.3;
+						LastSwiftMigration = 1120;
 						TestTargetID = AB27D36D23AFB74F00EC4B11;
 					};
 					AB27D38E23AFB75200EC4B11 = {
@@ -357,7 +358,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB27D38923AFB75200EC4B11 /* SporcleTests.swift in Sources */,
+				A4A8721A23C3DF4A00481367 /* GameTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -557,6 +558,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = SporcleTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
@@ -578,6 +580,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = SporcleTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
@@ -588,6 +591,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = jonathan.SporcleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sporcle.app/Sporcle";
