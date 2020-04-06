@@ -217,7 +217,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AB27D39823AFB75200EC4B11 /* Build configuration list for PBXNativeTarget "Sporcle" */;
 			buildPhases = (
-				A4B85EC923BF959C0076D621 /* SwiftFormat */,
 				AB27D36A23AFB74F00EC4B11 /* Sources */,
 				AB27D36B23AFB74F00EC4B11 /* Frameworks */,
 				AB27D36C23AFB74F00EC4B11 /* Resources */,
@@ -235,7 +234,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AB27D39B23AFB75200EC4B11 /* Build configuration list for PBXNativeTarget "SporcleTests" */;
 			buildPhases = (
-				A4CE82F123D0A2C7000E96C8 /* SwiftFormat */,
 				AB27D38023AFB75200EC4B11 /* Sources */,
 				AB27D38123AFB75200EC4B11 /* Frameworks */,
 				AB27D38223AFB75200EC4B11 /* Resources */,
@@ -254,7 +252,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AB27D39E23AFB75200EC4B11 /* Build configuration list for PBXNativeTarget "SporcleUITests" */;
 			buildPhases = (
-				A4CE82F223D0A2F0000E96C8 /* SwiftFormat */,
 				AB27D38B23AFB75200EC4B11 /* Sources */,
 				AB27D38C23AFB75200EC4B11 /* Frameworks */,
 				AB27D38D23AFB75200EC4B11 /* Resources */,
@@ -338,63 +335,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		A4B85EC923BF959C0076D621 /* SwiftFormat */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftFormat;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "cd BuildTools\n#swift package update #Uncomment this line temporarily to update the version used to the latest matching your BuildTools/Package.swift file\nswift run -c release swiftformat \"$SRCROOT\" --lint\n";
-		};
-		A4CE82F123D0A2C7000E96C8 /* SwiftFormat */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftFormat;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "cd BuildTools\n#swift package update #Uncomment this line temporarily to update the version used to the latest matching your BuildTools/Package.swift file\nswift run -c release swiftformat \"$SRCROOT\" --lint\n";
-		};
-		A4CE82F223D0A2F0000E96C8 /* SwiftFormat */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftFormat;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "cd BuildTools\n#swift package update #Uncomment this line temporarily to update the version used to the latest matching your BuildTools/Package.swift file\nswift run -c release swiftformat \"$SRCROOT\" --lint\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AB27D36A23AFB74F00EC4B11 /* Sources */ = {
