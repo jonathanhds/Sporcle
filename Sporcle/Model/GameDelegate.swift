@@ -1,16 +1,16 @@
 import Foundation
 
 protocol GameDelegate: AnyObject {
-    func game(_ game: Game,
+    func game(_ game: GameManager,
               didMatchWord word: String)
 
-    func game(_ game: Game,
+    func game(_ game: GameManager,
               didUpdateScore score: Int)
 
-    func game(_ game: Game,
+    func game(_ game: GameManager,
               didUpdateTime timeInSeconds: TimeInterval)
 
-    func gameDidLose(_ game: Game)
+    func gameDidLose(_ game: GameManager)
 
-    func gameDidWin(_ game: Game)
+    func gameDidWin(_ game: GameManager)
 }

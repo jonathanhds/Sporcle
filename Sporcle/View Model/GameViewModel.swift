@@ -10,7 +10,7 @@ class GameViewModel {
 
     @Published private(set) var isLoading: Bool = false
 
-    @Published private(set) var game: Game? {
+    @Published private(set) var game: GameManager? {
         didSet {
             game?.delegate = self
             reset()
@@ -38,7 +38,7 @@ class GameViewModel {
 
                 if let quiz = quiz {
                     self?.title = quiz.title
-                    self?.game = Game(words: quiz.words)
+                    self?.game = GameManager(words: quiz.words)
                 } else if let error = error {
                     self?.loadingError.send(error)
                 }
@@ -74,26 +74,26 @@ class GameViewModel {
 // MARK: - GameDelegate
 
 extension GameViewModel: GameDelegate {
-    func game(_: Game, didMatchWord word: String) {
+    func game(_: GameManager, didMatchWord word: String) {
         matchedWord.send(word)
     }
 
-    func game(_ game: Game, didUpdateScore score: Int) {
+    func game(_ game: GameManager, didUpdateScore score: Int) {
         self.score = "\(score)/\(game.wordsCount)"
     }
 
-    func game(_: Game, didUpdateTime timeInSeconds: TimeInterval) {
+    func game(_: GameManager, didUpdateTime timeInSeconds: TimeInterval) {
         let minutes = Int(timeInSeconds) / 60
         let seconds = Int(timeInSeconds) % 60
 
         time = String(format: "%02i:%02i", minutes, seconds)
     }
 
-    func gameDidLose(_: Game) {
+    func gameDidLose(_: GameManager) {
         gameResult.send(false)
     }
 
-    func gameDidWin(_: Game) {
+    func gameDidWin(_: GameManager) {
         gameResult.send(true)
     }
 }

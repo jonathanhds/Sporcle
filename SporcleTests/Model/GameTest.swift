@@ -66,13 +66,10 @@ class GameTest: XCTestCase {
         let game = Game(words: ["Banana", "Apple"])
 
         // When
-        game.start()
         game.match(word: "Banana")
         game.reset()
 
         // Then
-        XCTAssertFalse(game.isRunning)
-        XCTAssertEqual(game.score, 0)
         XCTAssertEqual(game.matchedWordsCount, 0)
     }
 }
