@@ -1,12 +1,11 @@
 import Foundation
 
 protocol GameRules {
+    var matchedWords: [String] { get }
     var score: Int { get }
-    var matchedWordsCount: Int { get }
     var wordsCount: Int { get }
 
     func reset()
-    func matchedWord(at indexPath: IndexPath) -> String?
     func match(word: String) -> Bool
     func checkWinGame() -> Bool
 }
@@ -14,13 +13,11 @@ protocol GameRules {
 class Game: GameRules {
     var score: Int { matchedWords.count }
 
-    var matchedWordsCount: Int { matchedWords.count }
-
     var wordsCount: Int { words.count }
 
     private let words: [String]
 
-    private var matchedWords: [String]
+    private(set) var matchedWords: [String]
 
     init(words: [String]) {
         self.words = words
@@ -29,10 +26,6 @@ class Game: GameRules {
 
     func reset() {
         matchedWords = []
-    }
-
-    func matchedWord(at indexPath: IndexPath) -> String? {
-        matchedWords[indexPath.row]
     }
 
     @discardableResult

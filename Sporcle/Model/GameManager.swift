@@ -10,7 +10,7 @@ import Foundation
 
 class GameManager {
     var wordsCount: Int { gameRules.wordsCount }
-    var matchedWordsCount: Int { gameRules.matchedWordsCount }
+    var matchedWords: [String] { gameRules.matchedWords }
 
     private var gameRules: GameRules
     private var gameTime: Timer
@@ -36,10 +36,6 @@ class GameManager {
         gameTime.reset()
         gameRules.reset()
         delegate?.game(self, didUpdateScore: score)
-    }
-
-    func matchedWord(at indexPath: IndexPath) -> String? {
-        gameRules.matchedWord(at: indexPath)
     }
 
     func match(word: String) {
