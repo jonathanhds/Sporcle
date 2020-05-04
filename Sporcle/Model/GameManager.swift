@@ -13,7 +13,7 @@ class GameManager {
     var matchedWordsCount: Int { gameRules.matchedWordsCount }
 
     private var gameRules: GameRules
-    private var gameTime: GameTime
+    private var gameTime: Timer
 
     private(set) var isRunning = false
 
@@ -23,7 +23,7 @@ class GameManager {
 
     init(words: [String]) {
         gameRules = Game(words: words)
-        gameTime = GameTimer()
+        gameTime = StopWatch()
         gameTime.delegate = self
     }
 
@@ -56,12 +56,12 @@ class GameManager {
     }
 }
 
-extension GameManager: GameTimerDelegate {
-    func game(_: GameTime, didUpdateTime timeInSeconds: TimeInterval) {
+extension GameManager: TimerDelegate {
+    func timer(_ timer: Timer, didUpdateTime timeInSeconds: TimeInterval) {
         delegate?.game(self, didUpdateTime: timeInSeconds)
     }
 
-    func gameDidLose(_: GameTime) {
+    func timedOut(_ timer: Timer) {
         delegate?.gameDidLose(self)
     }
 }

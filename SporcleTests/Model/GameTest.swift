@@ -2,6 +2,7 @@ import XCTest
 @testable import Sporcle
 
 class GameTest: XCTestCase {
+    // TODO: Implement this!!!!
     func testShoudThrowErrorIfWordsListCountIsZero() {}
 
     func testShouldCountScoreWords() {
@@ -71,5 +72,28 @@ class GameTest: XCTestCase {
 
         // Then
         XCTAssertEqual(game.matchedWordsCount, 0)
+    }
+
+    func testShouldWinGameIfMatchedAllWords() {
+        // Given
+        let game = Game(words: ["Banana", "Apple"])
+
+        // When
+        game.match(word: "Banana")
+        game.match(word: "Apple")
+
+        // Then
+        XCTAssertTrue(game.checkWinGame())
+    }
+
+    func testShouldNotWinGameIfNotMatchedAllWords() {
+        // Given
+        let game = Game(words: ["Banana", "Apple"])
+
+        // When
+        game.match(word: "Banana")
+
+        // Then
+        XCTAssertFalse(game.checkWinGame())
     }
 }

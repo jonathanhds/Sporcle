@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A4A8721A23C3DF4A00481367 /* GameTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A8721923C3DF4A00481367 /* GameTest.swift */; };
+		A4EA0C3D24586AA4004AC5DB /* StopWatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EA0C3C24586AA4004AC5DB /* StopWatchTests.swift */; };
 		AB27D37223AFB74F00EC4B11 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB27D37123AFB74F00EC4B11 /* AppDelegate.swift */; };
 		AB27D37423AFB74F00EC4B11 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB27D37323AFB74F00EC4B11 /* SceneDelegate.swift */; };
 		AB27D37623AFB74F00EC4B11 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB27D37523AFB74F00EC4B11 /* GameViewController.swift */; };
@@ -22,7 +23,7 @@
 		AB4C5D0A23B027A0005311A5 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4C5D0923B027A0005311A5 /* UIViewController+Alert.swift */; };
 		AB6CDC2D23BEBEF0009DA285 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6CDC2C23BEBEF0009DA285 /* GameViewModel.swift */; };
 		AD1B87EE243B945C000E8E92 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1B87ED243B945C000E8E92 /* GameManager.swift */; };
-		AD1B87F0243BBB0A000E8E92 /* GameTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1B87EF243BBB0A000E8E92 /* GameTimer.swift */; };
+		AD1B87F0243BBB0A000E8E92 /* StopWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1B87EF243BBB0A000E8E92 /* StopWatch.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 
 /* Begin PBXFileReference section */
 		A4A8721923C3DF4A00481367 /* GameTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTest.swift; sourceTree = "<group>"; };
+		A4EA0C3C24586AA4004AC5DB /* StopWatchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatchTests.swift; sourceTree = "<group>"; };
 		AB27D36E23AFB74F00EC4B11 /* Sporcle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sporcle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB27D37123AFB74F00EC4B11 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB27D37323AFB74F00EC4B11 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,7 +65,7 @@
 		AB4C5D0923B027A0005311A5 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 		AB6CDC2C23BEBEF0009DA285 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 		AD1B87ED243B945C000E8E92 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
-		AD1B87EF243BBB0A000E8E92 /* GameTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTimer.swift; sourceTree = "<group>"; };
+		AD1B87EF243BBB0A000E8E92 /* StopWatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatch.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				A4A8721923C3DF4A00481367 /* GameTest.swift */,
+				A4EA0C3C24586AA4004AC5DB /* StopWatchTests.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -163,7 +166,7 @@
 				AB27D3A723AFBB1E00EC4B11 /* Game.swift */,
 				AB27D3AB23AFBBD500EC4B11 /* GameDelegate.swift */,
 				AD1B87ED243B945C000E8E92 /* GameManager.swift */,
-				AD1B87EF243BBB0A000E8E92 /* GameTimer.swift */,
+				AD1B87EF243BBB0A000E8E92 /* StopWatch.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -349,7 +352,7 @@
 				AB6CDC2D23BEBEF0009DA285 /* GameViewModel.swift in Sources */,
 				AB4C5D0623B0240D005311A5 /* QuizService.swift in Sources */,
 				AB27D3AC23AFBBD500EC4B11 /* GameDelegate.swift in Sources */,
-				AD1B87F0243BBB0A000E8E92 /* GameTimer.swift in Sources */,
+				AD1B87F0243BBB0A000E8E92 /* StopWatch.swift in Sources */,
 				AB4C5D0823B0242E005311A5 /* Quiz.swift in Sources */,
 				AB27D37623AFB74F00EC4B11 /* GameViewController.swift in Sources */,
 				AB27D37223AFB74F00EC4B11 /* AppDelegate.swift in Sources */,
@@ -365,6 +368,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4A8721A23C3DF4A00481367 /* GameTest.swift in Sources */,
+				A4EA0C3D24586AA4004AC5DB /* StopWatchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
