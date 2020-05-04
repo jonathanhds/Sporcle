@@ -35,18 +35,19 @@ struct MainView: View {
                     }
                 }
                 .padding()
-                .alert(isPresented: $viewModel.shouldShowWinMessage) {
-                    Alert(title: Text("Congrats!"), message: Text("Yay, you won! Tap OK to restart the game."), dismissButton: .default(Text("OK"), action: {
-                        self.viewModel.reset()
-                    }))
-                }
-                .alert(isPresented: $viewModel.shouldShowLoseMessage) {
-                    Alert(title: Text("Too bad!"), message: Text("Oh no, It's game over! Tap OK to restart the game."), dismissButton: .default(Text("OK"), action: {
-                        self.viewModel.reset()
-                    }))
-                }
-                .alert(isPresented: $viewModel.shouldShowLoadingErrorMessage) {
-                    Alert(title: Text("Error"), message: Text("Could not fetch quizzes. Please, check you Internet connection and try again."))
+                .alert(isPresented: $viewModel.shouldShowAlert) {
+                    switch viewModel.alertType {
+                    case .win:
+                        return Alert(title: Text("Congrats!"), message: Text("Yay, you won! Tap OK to restart the game."), dismissButton: .default(Text("OK"), action: {
+                            self.viewModel.reset()
+                        }))
+                    case .lose:
+                        return Alert(title: Text("Too bad!"), message: Text("Oh no, It's game over! Tap OK to restart the game."), dismissButton: .default(Text("OK"), action: {
+                            self.viewModel.reset()
+                        }))
+                    case .none, .error:
+                        return Alert(title: Text("Error"), message: Text("Could not fetch quizzes. Please, check you Internet connection and try again."))
+                    }
                 }
             }
         }.onAppear { self.viewModel.loadQuiz() }

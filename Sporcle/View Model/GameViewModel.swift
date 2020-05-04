@@ -1,6 +1,13 @@
 import Combine
 import Foundation
 
+enum GameAlertType {
+    case none
+    case win
+    case lose
+    case error
+}
+
 final class GameViewModel: ObservableObject {
     @Published private(set) var title: String = ""
 
@@ -12,17 +19,13 @@ final class GameViewModel: ObservableObject {
 
     @Published var text: String = ""
 
-    @Published var shouldShowWinMessage = false
+    @Published var shouldShowAlert = false
 
-    @Published var shouldShowLoseMessage = false
-
-    @Published var shouldShowLoadingErrorMessage = false
+    var alertType: GameAlertType = .none
 
     @Published var isRunning = false
 
     let matchedWord = PassthroughSubject<String, Never>()
-
-    let loadingError = PassthroughSubject<Error, Never>()
 
     var matchedWords: [String] { game?.matchedWords ?? [] }
 
@@ -48,8 +51,9 @@ final class GameViewModel: ObservableObject {
                 if let quiz = quiz {
                     self.title = quiz.title
                     self.game = GameManager(words: quiz.words)
-                } else if let error = error {
-                    self.loadingError.send(error)
+                } else if let _ = error {
+                    self.alertType = .error
+                    self.shouldShowAlert = true
                 }
             }
         }
@@ -100,10 +104,12 @@ extension GameViewModel: GameDelegate {
     }
 
     func gameDidLose(_: GameManager) {
-        shouldShowLoseMessage = true
+        alertType = .lose
+        shouldShowAlert = true
     }
 
     func gameDidWin(_: GameManager) {
-        shouldShowWinMessage = true
+        alertType = .win
+        shouldShowAlert = true
     }
 }
