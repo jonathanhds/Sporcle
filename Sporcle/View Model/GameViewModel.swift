@@ -10,6 +10,8 @@ final class GameViewModel: ObservableObject {
 
     @Published private(set) var isLoading: Bool = false
 
+    @Published var text: String = ""
+
     @Published var shouldShowWinMessage = false
 
     @Published var shouldShowLoseMessage = false
@@ -83,6 +85,7 @@ final class GameViewModel: ObservableObject {
 extension GameViewModel: GameDelegate {
     func game(_: GameManager, didMatchWord word: String) {
         matchedWord.send(word)
+        text = ""
     }
 
     func game(_ game: GameManager, didUpdateScore score: Int) {

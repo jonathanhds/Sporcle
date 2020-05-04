@@ -4,8 +4,6 @@ struct MainView: View {
 
     @ObservedObject var viewModel: GameViewModel
 
-    @State private var text: String = ""
-
     var body: some View {
         Group {
             if viewModel.isLoading {
@@ -15,8 +13,8 @@ struct MainView: View {
                     Text(viewModel.title)
                         .font(.title)
 
-                    TextField("Insert word", text: $text, onEditingChanged: { _ in
-                        self.viewModel.match(word: self.text)
+                    TextField("Insert word", text: $viewModel.text, onEditingChanged: { _ in
+                        self.viewModel.match(word: self.viewModel.text)
                     })
                         .disabled(!viewModel.isRunning)
 
