@@ -27,12 +27,18 @@ class GameViewModel {
 
     let loadingError = PassthroughSubject<Error, Never>()
 
+    let service: QuizServiceProtocol
+
     var matchedWordsCount: Int? { game?.matchedWordsCount }
+
+    init(service: QuizServiceProtocol = QuizService()) {
+        self.service = service
+    }
 
     func loadQuiz() {
         isLoading = true
 
-        QuizService().loadQuiz { quiz, error in
+        service.loadQuiz { quiz, error in
             DispatchQueue.main.async { [weak self] in
                 self?.isLoading = false
 

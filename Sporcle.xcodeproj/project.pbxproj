@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A44E6F52246446D7001E7BC4 /* GameViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44E6F51246446D7001E7BC4 /* GameViewModelTests.swift */; };
 		A4A8721A23C3DF4A00481367 /* GameTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A8721923C3DF4A00481367 /* GameTest.swift */; };
 		A4EA0C3D24586AA4004AC5DB /* StopWatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EA0C3C24586AA4004AC5DB /* StopWatchTests.swift */; };
 		AB27D37223AFB74F00EC4B11 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB27D37123AFB74F00EC4B11 /* AppDelegate.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A44E6F51246446D7001E7BC4 /* GameViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModelTests.swift; sourceTree = "<group>"; };
 		A4A8721923C3DF4A00481367 /* GameTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTest.swift; sourceTree = "<group>"; };
 		A4EA0C3C24586AA4004AC5DB /* StopWatchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatchTests.swift; sourceTree = "<group>"; };
 		AB27D36E23AFB74F00EC4B11 /* Sporcle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sporcle.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,6 +103,14 @@
 			name = "Support files";
 			sourceTree = "<group>";
 		};
+		A44E6F50246446BD001E7BC4 /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				A44E6F51246446D7001E7BC4 /* GameViewModelTests.swift */,
+			);
+			path = "View Model";
+			sourceTree = "<group>";
+		};
 		A4A8721823C3DEB800481367 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +158,7 @@
 			children = (
 				A4A8721823C3DEB800481367 /* Model */,
 				A41466BF23C3ECCC00674677 /* Support files */,
+				A44E6F50246446BD001E7BC4 /* View Model */,
 			);
 			path = SporcleTests;
 			sourceTree = "<group>";
@@ -368,6 +379,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4A8721A23C3DF4A00481367 /* GameTest.swift in Sources */,
+				A44E6F52246446D7001E7BC4 /* GameViewModelTests.swift in Sources */,
 				A4EA0C3D24586AA4004AC5DB /* StopWatchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,6 +1,10 @@
 import Foundation
 
-class QuizService {
+protocol QuizServiceProtocol {
+    func loadQuiz(completion: @escaping (Quiz?, Error?) -> Void)
+}
+
+class QuizService: QuizServiceProtocol {
     private static let queue: DispatchQueue = DispatchQueue(label: "QuizService")
 
     func loadQuiz(completion: @escaping (Quiz?, Error?) -> Void) {
