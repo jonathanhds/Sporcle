@@ -1,105 +1,47 @@
 import Foundation
 
-private struct Constants {
-    static let ONE_SECOND: TimeInterval = 1.0
-    static let GAME_START_TIME = ONE_SECOND * 60 * 5
+protocol GameRules {
+    var matchedWords: [String] { get }
+    var score: Int { get }
+    var wordsCount: Int { get }
+
+    func reset()
+    func match(word: String) -> Bool
+    func checkWinGame() -> Bool
 }
 
-class Game {
-    private let words: [String]
-
-    private var matchedWords: [String]
-
-    private var timer: Timer?
-
-    private(set) var score: Int {
-        didSet {
-            delegate?.game(self, didUpdateScore: score)
-        }
-    }
-
-    private(set) var timeInSeconds: TimeInterval {
-        didSet {
-            delegate?.game(self, didUpdateTime: timeInSeconds)
-        }
-    }
-
-    private(set) var isRunning = false
-
-    weak var delegate: GameDelegate?
+class Game: GameRules {
+    var score: Int { matchedWords.count }
 
     var wordsCount: Int { words.count }
 
-    var matchedWordsCount: Int { matchedWords.count }
+    private let words: [String]
+
+    private(set) var matchedWords: [String]
 
     init(words: [String]) {
         self.words = words
         matchedWords = []
-        score = 0
-        timeInSeconds = Constants.GAME_START_TIME
-    }
-
-    deinit {
-        stopTimer()
-    }
-
-    func start() {
-        reset()
-        startTimer()
-        isRunning = true
     }
 
     func reset() {
-        stopTimer()
         matchedWords = []
-        score = 0
-        timeInSeconds = Constants.GAME_START_TIME
-        isRunning = false
     }
 
-    func matchedWord(at indexPath: IndexPath) -> String? {
-        matchedWords[indexPath.row]
+    @discardableResult
+    func match(word: String) -> Bool {
+        guard !isAlreadyMatched(word: word) else { return false }
+        guard words.contains(word) else { return false }
+
+        matchedWords.append(word)
+        return true
     }
 
-    func match(word: String) {
-        guard !isAlreadyMatched(word: word) else { return }
-
-        if words.contains(word) {
-            matchedWords.append(word)
-
-            score += 1
-
-            delegate?.game(self, didMatchWord: word)
-
-            if score == words.count {
-                isRunning = false
-                stopTimer()
-                delegate?.gameDidWin(self)
-            }
-        }
+    func checkWinGame() -> Bool {
+        matchedWords.count == words.count
     }
 
     private func isAlreadyMatched(word: String) -> Bool {
         matchedWords.contains(word)
-    }
-
-    private func stopTimer() {
-        timer?.invalidate()
-        timer = nil
-    }
-
-    private func startTimer() {
-        stopTimer()
-        timer = Timer.scheduledTimer(withTimeInterval: Constants.ONE_SECOND, repeats: true) { [weak self] _ in
-            guard let self = self else { return }
-
-            self.timeInSeconds -= Constants.ONE_SECOND
-
-            if self.timeInSeconds <= 0 {
-                self.isRunning = false
-                self.delegate?.gameDidLose(self)
-                self.stopTimer()
-            }
-        }
     }
 }
