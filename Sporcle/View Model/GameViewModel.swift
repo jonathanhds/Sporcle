@@ -25,8 +25,6 @@ final class GameViewModel: ObservableObject {
 
     @Published var isRunning = false
 
-    let matchedWord = PassthroughSubject<String, Never>()
-
     var matchedWords: [String] { game?.matchedWords ?? [] }
 
     private var game: GameManager? {
@@ -95,7 +93,6 @@ final class GameViewModel: ObservableObject {
 
 extension GameViewModel: GameDelegate {
     func game(_: GameManager, didMatchWord word: String) {
-        matchedWord.send(word)
         text = ""
     }
 
