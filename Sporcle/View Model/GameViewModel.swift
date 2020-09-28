@@ -36,14 +36,16 @@ final class GameViewModel: ObservableObject {
         }
     }
 
-    init(title: String = "") {
-        self.title = title
+    private let service: QuizServiceProtocol
+
+    init(service: QuizServiceProtocol = QuizService()) {
+        self.service = service
     }
 
     func loadQuiz() {
         isLoading = true
 
-        QuizService().loadQuiz { quiz, error in
+        service.loadQuiz { quiz, error in
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 self.isLoading = false

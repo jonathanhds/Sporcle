@@ -16,7 +16,7 @@ struct MainView: View {
                     TextField("Insert word", text: $viewModel.text, onEditingChanged: { _ in
                         self.viewModel.match(word: self.viewModel.text)
                     })
-                        .disabled(!viewModel.isRunning)
+                    .disabled(!viewModel.isRunning)
 
                     List(viewModel.matchedWords, id: \.description) { word in
                         Text(word)
@@ -31,7 +31,7 @@ struct MainView: View {
                     GameButton(action: {
                         self.viewModel.startOrResetGame()
                     }) {
-                       Text(viewModel.isRunning ? "Stop" : "Start")
+                        Text(viewModel.isRunning ? "Stop" : "Start")
                     }
                 }
                 .padding()
@@ -56,6 +56,6 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(viewModel: GameViewModel(title: "Fruits"))
+        MainView(viewModel: GameViewModel())
     }
 }
