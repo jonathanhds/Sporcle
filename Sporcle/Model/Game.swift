@@ -10,6 +10,10 @@ protocol GameRules {
     func checkWinGame() -> Bool
 }
 
+enum GameError: Error {
+    case wordsListIsEmpty
+}
+
 class Game: GameRules {
     var score: Int { matchedWords.count }
 
@@ -19,7 +23,8 @@ class Game: GameRules {
 
     private(set) var matchedWords: [String]
 
-    init(words: [String]) {
+    init(words: [String]) throws {
+        guard words.isEmpty == false else { throw GameError.wordsListIsEmpty }
         self.words = words
         matchedWords = []
     }

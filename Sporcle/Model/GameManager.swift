@@ -21,8 +21,8 @@ class GameManager {
 
     weak var delegate: GameDelegate?
 
-    init(words: [String]) {
-        gameRules = Game(words: words)
+    init(words: [String]) throws {
+        gameRules = try Game(words: words)
         gameTime = StopWatch()
         gameTime.delegate = self
     }

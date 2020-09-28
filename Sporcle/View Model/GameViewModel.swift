@@ -50,10 +50,15 @@ final class GameViewModel: ObservableObject {
                 guard let self = self else { return }
                 self.isLoading = false
 
-                if let quiz = quiz {
-                    self.title = quiz.title
-                    self.game = GameManager(words: quiz.words)
-                } else if let _ = error {
+                do {
+                    if let quiz = quiz {
+                        self.title = quiz.title
+                        self.game = try GameManager(words: quiz.words)
+                    } else if let _ = error {
+                        self.alertType = .error
+                        self.shouldShowAlert = true
+                    }
+                } catch {
                     self.alertType = .error
                     self.shouldShowAlert = true
                 }
